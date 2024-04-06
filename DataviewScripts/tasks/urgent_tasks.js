@@ -15,9 +15,23 @@ const queryFolders = folders.map(folder => `"${folder}"`).join(" or ");
 // The number of tasks displayed.
 const taskLimit = 8;
 
-// Filter pages.
+// Filter pages that are in progress modules and others.
 function filterPage(page)
 {
+    if (page.file.etags.includes("#Type/Project-Module"))
+    {
+        if (page.status == "In Progress")
+        {
+            // An in progress module.
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    // Other type pages.
     return true;
 }
 

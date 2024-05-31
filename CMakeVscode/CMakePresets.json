@@ -20,6 +20,14 @@
             "displayName": "x64-Debug-Ninja",
             "description": "Ninja Generator, MSVC",
             "generator": "Ninja",
+            "toolset": {
+                "value": "host=x64",
+                "strategy": "external"
+            },
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
+            },
             "binaryDir": "${sourceDir}/out/build/${presetName}",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",

@@ -1,56 +1,111 @@
 {
-    "version": 8,
-    "configurePresets": [
-        {
-            "name": "x64-Debug-VS2022",
-            "displayName": "x64-Debug-VS2022",
-            "description": "Visual Studio 17 2022 (x64 architecture)",
-            "generator": "Visual Studio 17 2022",
-            "toolset": "host=x64",
-            "architecture": "x64",
-            "binaryDir": "${sourceDir}/out/build/${presetName}",
-            "cacheVariables": {
-                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
-                "CMAKE_C_COMPILER": "cl.exe",
-                "CMAKE_CXX_COMPILER": "cl.exe"
-            }
-        },
-        {
-            "name": "x64-Debug-Ninja",
-            "displayName": "x64-Debug-Ninja",
-            "description": "Ninja Generator, MSVC",
-            "generator": "Ninja",
-            "toolset": {
-                "value": "host=x64",
-                "strategy": "external"
-            },
-            "architecture": {
-                "value": "x64",
-                "strategy": "external"
-            },
-            "binaryDir": "${sourceDir}/out/build/${presetName}",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug",
-                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
-                "CMAKE_C_COMPILER": "cl.exe",
-                "CMAKE_CXX_COMPILER": "cl.exe"
-            }
+  "version": 6,
+  "configurePresets": [
+    {
+      // Windows, VS Generator, MSVC.
+      "name": "x64-Debug-Windows-VS",
+      "displayName": "x64-Debug-Windows-VS",
+      "description": "Visual Studio 17 2022 (x64 architecture)",
+      "generator": "Visual Studio 17 2022",
+      "toolset": "host=x64",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+        "CMAKE_C_COMPILER": "cl.exe",
+        "CMAKE_CXX_COMPILER": "cl.exe"
+      },
+      // Vendor-specific settings.
+      "vendor": {
+        // VS settings map, some can be applied in VS Code.
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "hostOS": "Windows"
         }
-    ],
-    "buildPresets": [
-        {
-            "name": "x64-Debug-VS2022",
-            "displayName": "x64-Debug-VS2022",
-            "configurePreset": "x64-Debug-VS2022",
-            "configuration": "Debug",
-            "jobs": 4
-        },
-        {
-            "name": "x64-Debug-Ninja",
-            "displayName": "x64-Debug-Ninja",
-            "configurePreset": "x64-Debug-Ninja",
-            "configuration": "Debug",
-            "jobs": 4
+      }
+    },
+    {
+      // Windows, Ninja Generator, MSVC.
+      "name": "x64-Debug-Windows",
+      "displayName": "x64-Debug-Windows",
+      "description": "Ninja Generator, MSVC",
+      "generator": "Ninja",
+      "toolset": {
+        "value": "host=x64",
+        "strategy": "external"
+      },
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+        "CMAKE_C_COMPILER": "cl.exe",
+        "CMAKE_CXX_COMPILER": "cl.exe"
+      },
+      // Vendor-specific settings.
+      "vendor": {
+        // VS settings map, some can be applied in VS Code.
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "hostOS": "Windows"
         }
-    ]
+      }
+    },
+    {
+      // Linux, Ninja generator, default compiler.
+      "name": "x64-Debug-Linux",
+      "displayName": "x64-Debug-Linux",
+      "description": "Ninja Generator",
+      "generator": "Ninja",
+      "toolset": {
+        "value": "host=x64",
+        "strategy": "external"
+      },
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+      },
+      // Vendor-specific settings.
+      "vendor": {
+        // VS settings map, some can be applied in VS Code.
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "hostOS": "Linux"
+        },
+        // VS remote settings map.
+        "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
+          "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}",
+          "copyExcludeDirectoriesList": [ ".vs", ".git", "out" ]
+        }
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "x64-Debug-Windows-VS",
+      "displayName": "x64-Debug-Windows-VS",
+      "configurePreset": "x64-Debug-Windows-VS",
+      "configuration": "Debug",
+      "jobs": 4
+    },
+    {
+      "name": "x64-Debug-Windows",
+      "displayName": "x64-Debug-Windows",
+      "configurePreset": "x64-Debug-Windows",
+      "configuration": "Debug",
+      "jobs": 4
+    },
+    {
+      "name": "x64-Debug-Linux",
+      "displayName": "x64-Debug-Linux",
+      "configurePreset": "x64-Debug-Linux",
+      "configuration": "Debug",
+      "jobs": 4
+    }
+  ]
 }

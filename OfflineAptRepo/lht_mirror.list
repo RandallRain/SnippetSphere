@@ -1,0 +1,42 @@
+############# config ##################
+# CANNOT have spaces in the following paths.
+
+# The root path for storing the mirrored repository.
+set base_path    /home/lht/UbuntuRepo
+# The path for storing the actual mirrored packages.
+set mirror_path  $base_path/mirror
+# The path for storing the initial structure of the mirror directory 
+# before the actual packages are downloaded.
+set skel_path    $base_path/skel
+# The path for various variable data, such as logs and lock files.
+set var_path     $base_path/var
+# The path to the clean-up script. This script is run after the mirroring process to 
+# remove old or unnecessary files.
+set cleanscript $var_path/clean.sh
+# The default architecture to mirror.
+set defaultarch  amd64
+# the path to a script that should be executed after the mirroring process is complete.
+set postmirror_script $var_path/postmirror.sh
+# Whether to run the postmirror script.
+set run_postmirror 0
+# The number of threads to use for downloading.
+set nthreads     20
+# This setting is used to handle tilde (~) in URLs. 
+# Setting it to 0 will disable special handling for tilde.
+set _tilde 0
+#
+############# end config ##############
+
+# For Ubuntu 22.04, jammy, aliyun sources.
+# Discard source files, only download binary files.
+
+deb https://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse
+deb https://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse
+deb https://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse
+deb https://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
+
+# Pre-released sources, not suggested.
+# deb https://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
+
+# Remove files that are no longer in the remote repo.
+clean https://mirrors.aliyun.com/ubuntu

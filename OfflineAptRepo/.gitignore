@@ -1,0 +1,5 @@
+# Ignore files and folders
+UbuntuMetaData/*
+UbuntuMetaData*/*
+WgetTest/*
+*.log
